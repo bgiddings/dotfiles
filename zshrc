@@ -46,40 +46,15 @@ source ~/.zsh/zsh_comp_specific
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-# source /etc/bash_completion.d/g4d
-
 # Nuke - _ / [ and ] from wordchars
 WORDCHARS=${WORDCHARS//[-\/_\[\]]/} 
 # WORDCHARS="${WORDCHARS:s#/#}"
 
-### Local stuff ###
-alias merx='ssh merx.hot'
-alias gemacs='emacs -nw --load ~/.gemacs'
-
-export P4CONFIG=.p4config
-export P4DIFF="/home/build/google3/devtools/scripts/p4diff -uw"
-export P4MERGE=/home/build/eng/perforce/mergep4.tcl
-
 #export EDITOR='emacs'   # this runs in a GUI.
 export EDITOR='emacs -nw'
 
-# ZSH Completions for Brew (MacOS only)
-fpath=($HOME/homebrew/share/zsh-completions $fpath)
+export SPROMPT="Correct %R to %r? ([y]es, [n]o, [a]bort, [e]dit) "
 
-# bind UP and DOWN arrow keys
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+autoload -U bashcompinit
+bashcompinit
 
-# bind UP and DOWN arrow keys (compatibility fallback
-# for Ubuntu 12.04, Fedora 21, and MacOSX 10.9 users)
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-# bind P and N for EMACS mode
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
-
-# bind k and j for VI mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
