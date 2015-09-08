@@ -12,7 +12,7 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower
 # zstyle ':completion:*' max-errors 2
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' use-compctl false
-zstyle :compinstall filename '/Users/bgiddings/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' hosts off
 
 autoload -Uz compinit
@@ -42,12 +42,10 @@ stty -ixon -ixoff 2>/dev/null # really, no flow control.
 source ~/.zsh/zsh_ps1_merc
 source ~/.zsh/zsh_aliases_merc
 source ~/.zsh/zsh_opts_merc
+source ~/.zsh/zsh_comp_specific
 source ~/Documents/Development/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # source /etc/bash_completion.d/g4d
-
-# https://github.com/zsh-users/zsh-syntax-highlighting
-export PATH=~/bin:/opt/local/bin:/opt/local/sbin:/usr/local/google/home/bgiddings/Documents/Development/go_appengine:$HOME/homebrew/bin:$PATH
 
 # Nuke - _ / [ and ] from wordchars
 WORDCHARS=${WORDCHARS//[-\/_\[\]]/} 
@@ -65,7 +63,7 @@ export P4MERGE=/home/build/eng/perforce/mergep4.tcl
 export EDITOR='emacs -nw'
 
 # ZSH Completions for Brew (MacOS only)
-fpath=(/Users/bgiddings/homebrew/share/zsh-completions $fpath)
+fpath=($HOME/homebrew/share/zsh-completions $fpath)
 
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
