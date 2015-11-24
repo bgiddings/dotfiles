@@ -1,7 +1,7 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.zhistfile
-HISTSIZE=2000
-SAVEHIST=2000
+HISTSIZE=5000
+SAVEHIST=5000
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 
@@ -50,6 +50,11 @@ WORDCHARS=${WORDCHARS//[-\/_\[\]]/}
 
 #export EDITOR='emacs'   # this runs in a GUI.
 export EDITOR='emacs -nw'
+
+# Edit the current command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
 
 export SPROMPT="Correct %R to %r? ([y]es, [n]o, [a]bort, [e]dit) "
 
