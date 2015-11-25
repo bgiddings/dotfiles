@@ -56,6 +56,14 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
+# http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
+# Allow meta-m to copy the last word of the current line, or with meta-. to 
+# copy words from pervious lines
+autoload -Uz copy-earlier-word
+zle -N copy-earlier-word
+bindkey "^[m" copy-earlier-word
+
+
 export SPROMPT="Correct %R to %r? ([y]es, [n]o, [a]bort, [e]dit) "
 
 autoload -U bashcompinit
