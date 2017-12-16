@@ -39,7 +39,7 @@ zstyle ':completion::complete:cd::' tag-order '! users' -
 
 stty -ixon -ixoff 2>/dev/null # really, no flow control.
 
-source ~/.zsh/zsh_ps1
+source ~/.zsh/zsh_prompts
 source ~/.zsh/zsh_aliases
 source ~/.zsh/zsh_opts
 
