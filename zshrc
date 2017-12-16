@@ -43,8 +43,8 @@ source ~/.zsh/zsh_ps1_merc
 source ~/.zsh/zsh_aliases_merc
 source ~/.zsh/zsh_opts_merc
 source ~/.zsh/zsh_comp_specific
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+test -e ~/.dircolors && eval `dircolors -b ~/.dircolors`
 
 # Nuke - _ / [ and ] from wordchars
 WORDCHARS=${WORDCHARS//[-\/_\[\]]/} 

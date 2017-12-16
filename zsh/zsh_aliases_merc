@@ -1,0 +1,29 @@
+#
+# Aliases
+#
+
+
+alias mv='nocorrect mv'
+alias cp='nocorrect cp'
+alias mkdir='nocorrect mkdir'
+alias j=jobs
+alias pu=pushd
+alias po=popd
+alias d='dirs -v'
+alias h=history
+alias grep=grep --color="always"
+alias egrep=egrep --color="always"
+alias ls="command ls --color="always" -F"
+alias ll="command ls --color="always" -l -h"
+alias la="command ls --color="always" -a"
+alias ltrh="command ls --color="always" -ltrh"
+alias du='command du -h --max-depth=1'
+alias df='command df -h'
+alias diff='command diff -ubB'
+
+# List only directories and symlinks
+# that point to directories
+alias lsd="command ls --color="always" -ld *(-/DN)"
+
+# List only files beginning with .
+alias lsa="command ls --color="always" -ld .*"

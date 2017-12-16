@@ -1,0 +1,61 @@
+
+# Get the colors defined
+# ZSH builtin colors:
+# black, red, green, yellow, blue, magenta, cyan, and white
+autoload -U colors
+colors
+
+BLACK="%{$fg_no_bold[black]%}"
+RED="%{$fg_no_bold[red]%}"
+GREEN="%{$fg_no_bold[green]%}"
+YELLOW="%{$fg_no_bold[yellow]%}"
+BLUE="%{$fg_no_bold[blue]%}"
+MAGENTA="%{$fg_no_bold[magenta]%}"
+CYAN="%{$fg_no_bold[cyan]%}"
+WHITE="%{$fg_no_bold[white]%}"
+
+NO_COLOUR="%{$reset_color%}"
+
+TITLEBAR_START=$'%{\033]0;'
+TITLEBAR_END=$'\007%}'
+
+# are we an interactive shell?
+if [ "$PS1" ]; then
+    HOSTNAME=`/bin/hostname`
+    case $HOSTNAME in
+        (infofiend.com|colossus*) HOST_COLOUR=$MAGENTA
+        ;;
+        (colossus*|darkruby*|immerc*) HOST_COLOUR=$RED
+        ;;
+        (iceman*|psylocke*|domino*) HOST_COLOUR=$GREEN
+        ;;
+        (cyclops*|merx*|emma*) HOST_COLOUR=$CYAN
+        ;;
+        (lops-bgidd*|mops-bgidd*|bgiddings-macbookair*) HOST_COLOUR=$BLUE
+        ;;
+        (pol6*|pss*) HOST_COLOUR=$YELLOW
+        ;;
+        (ita1*|sfq*|ual*) HOST_COLOUR=$RED
+        ;;
+        (*) HOST_COLOUR=$WHITE
+        ;;
+    esac
+
+    case $TERM in 
+        (screen | xterm*)
+        PS1="$TITLEBAR_START%n@%m:%~$TITLEBAR_END$HOST_COLOUR%n@%m$NO_COLOUR%# "
+        RPS1="$GREEN%35<...<%~%<<$NO_COLOUR"
+        ;;
+        (linux)
+        PS1="$HOST_COLOUR%n@%m$NO_COLOUR%# "
+        RPS1="$GREEN%35<...<%~%<<$NO_COLOUR"
+        ;;
+        (*)
+        PS1="%n@%m%# "
+        RPS1="%35<...<%~%<<"
+        ;;
+    esac 
+fi
+
+
+PS2='%_>'

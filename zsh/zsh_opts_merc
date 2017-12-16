@@ -1,0 +1,51 @@
+# If a command isn't recognized but it is a name of a dir, cd to that dir
+setopt AUTO_CD
+
+# automatically make cd push directories onto the dir stack
+setopt AUTO_PUSHD
+
+# make 'pushd' the same as 'pushd $HOME'
+setopt PUSHD_TO_HOME
+
+# Don't put the same dir onto the stack multiple times
+setopt PUSHD_IGNORE_DUPS
+
+# Silently pushd
+setopt PUSHD_SILENT
+
+# Share history between sessions
+setopt SHARE_HISTORY
+
+# Allow commands pulled up from history to be edited (i.e. !ls)
+setopt HIST_VERIFY
+
+# Kill duplicates when history fills up
+setopt HIST_EXPIRE_DUPS_FIRST
+
+# When searching through history, don't show duplicates more than once
+setopt HIST_FIND_NO_DUPS
+
+# Don't beep for lists
+setopt NO_LIST_BEEP
+
+# Don't clobber files by default
+setopt NO_CLOBBER
+
+# Try to resume based on a short name (emacs -nw foo -> emacs)
+setopt AUTO_RESUME
+
+# Allow vars to be CD targets (cd $foo)
+setopt CDABLE_VARS
+
+# Try to correct
+setopt CORRECT
+setopt CORRECT_ALL
+
+# List jobs in long format
+setopt LONG_LIST_JOBS
+
+# In completion, recognize exact matches even if they are ambiguous
+# setopt REC_EXACT
+
+# Trace commands
+#setopt xtrace

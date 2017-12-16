@@ -1,0 +1,29 @@
+bindkey -e                 # emacs key bindings
+bindkey ' ' magic-space    # also do history expansion on space
+bindkey '^I' complete-word # complete on tab, leave expansion to _expand
+
+## This allows incremental completion of a word.
+## After starting this command, a list of completion
+## choices can be shown after every character you
+## type, which you can delete with ^h or DEL.
+## RET will accept the completion so far.
+## You can hit TAB to do normal completion, ^g to            
+## abort back to the state when you started, and ^d to list the matches.
+autoload -U incremental-complete-word
+zle -N incremental-complete-word
+bindkey "^Xi" incremental-complete-word ## C-x-i
+
+
+## This set of functions implements a sort of magic history searching.
+## After predict-on, typing characters causes the editor to look backward
+## in the history for the first line beginning with what you have typed so
+## far.  After predict-off, editing returns to normal for the line found.
+## In fact, you often don't even need to use predict-off, because if the
+## line doesn't match something in the history, adding a key performs
+## standard completion - though editing in the middle is liable to delete
+## the rest of the line.
+autoload -U predict-on
+zle -N predict-on
+zle -N predict-off
+bindkey "^X^Z" predict-on ## C-x C-z
+bindkey "^Z" predict-off ## C-z
