@@ -39,10 +39,20 @@ zstyle ':completion::complete:cd::' tag-order '! users' -
 
 stty -ixon -ixoff 2>/dev/null # really, no flow control.
 
-source ~/.zsh/zsh_ps1_merc
-source ~/.zsh/zsh_aliases_merc
-source ~/.zsh/zsh_opts_merc
-source ~/.zsh/zsh_comp_specific
+source ~/.zsh/zsh_ps1
+source ~/.zsh/zsh_aliases
+source ~/.zsh/zsh_opts
+
+name="$(uname -s)"
+case "${name}" in
+    Linux*)
+        source ~/.zsh/zsh_linux
+        ;;
+    Darwin*)
+        source ~/.zsh/zsh_mac
+        ;;
+esac
+
 
 test -e ~/.dircolors && eval `dircolors -b ~/.dircolors`
 
