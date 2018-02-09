@@ -46,7 +46,12 @@ source ~/.zsh/zsh_opts
 name="$(uname -s)"
 case "${name}" in
     Linux*)
-        source ~/.zsh/zsh_linux
+        if uname -r |grep -b -o -q Microsoft; then
+            # This is actually Linux Subsystem for Windows
+            source ~/.zsh/zsh_lsw
+        else
+            source ~/.zsh/zsh_linux
+        fi
         ;;
     Darwin*)
         source ~/.zsh/zsh_mac

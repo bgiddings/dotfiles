@@ -23,19 +23,19 @@ TITLEBAR_END=$'\007%}'
 if [ "$PS1" ]; then
     HOSTNAME=`/bin/hostname`
     case $HOSTNAME in
-        (infofiend.com|colossus*) HOST_COLOUR=$MAGENTA
+        (Beast) HOST_COLOUR=$MAGENTA
         ;;
-        (colossus*|darkruby*|immerc*) HOST_COLOUR=$RED
+        (raspi*|rasberrypi*) HOST_COLOUR=$RED
         ;;
-        (iceman*|psylocke*|domino*) HOST_COLOUR=$GREEN
+        (domino*) HOST_COLOUR=$GREEN
         ;;
-        (cyclops*|merx*|emma*) HOST_COLOUR=$CYAN
+        (UNUSED*) HOST_COLOUR=$CYAN
         ;;
-        (lops-bgidd*|mops-bgidd*|bgiddings-macbookair*) HOST_COLOUR=$BLUE
+        (UNUSED*) HOST_COLOUR=$BLUE
         ;;
-        (pol6*|pss*) HOST_COLOUR=$YELLOW
+        (UNUSED*) HOST_COLOUR=$YELLOW
         ;;
-        (ita1*|sfq*|ual*) HOST_COLOUR=$RED
+        (UNUSED*) HOST_COLOUR=$RED
         ;;
         (*) HOST_COLOUR=$WHITE
         ;;
