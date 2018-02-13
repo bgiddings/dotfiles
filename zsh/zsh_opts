@@ -19,11 +19,17 @@ setopt SHARE_HISTORY
 # Allow commands pulled up from history to be edited (i.e. !ls)
 setopt HIST_VERIFY
 
+# Kill sequential dups
+setopt HIST_IGNORE_DUPS
+
 # Kill duplicates when history fills up
 setopt HIST_EXPIRE_DUPS_FIRST
 
 # When searching through history, don't show duplicates more than once
 setopt HIST_FIND_NO_DUPS
+
+# If a command starts with a space, don't put it in the history
+setopt HIST_IGNORE_SPACE
 
 # Don't beep for lists
 setopt NO_LIST_BEEP
