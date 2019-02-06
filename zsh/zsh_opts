@@ -25,6 +25,9 @@ setopt HIST_EXPIRE_DUPS_FIRST
 # When searching through history, don't show duplicates more than once
 setopt HIST_FIND_NO_DUPS
 
+# Do not enter command lines into the history list if they are duplicates of the previous event.
+setopt HIST_IGNORE_DUPS
+
 # Don't beep for lists
 setopt NO_LIST_BEEP
 

@@ -1,6 +1,6 @@
 ### Local stuff ###
 #PATH=/usr/local/sbin:/usr/local/opt/icu4c/bin:/usr/local/opt/icu4c/sbin:$PATH
-PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+PATH="/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 PATH="$PATH:$HOME/.rvm/bin"
 export PATH
 
