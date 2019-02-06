@@ -5,6 +5,23 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+;; Emacs tip of the day
+;; https://www.emacswiki.org/emacs/TipOfTheDay
+(require 'cl)
+ (defun totd ()
+  (interactive)
+  (with-output-to-temp-buffer "*Tip of the day*"
+    (let* ((commands (loop for s being the symbols
+                           when (commandp s) collect s))
+           (command (nth (random (length commands)) commands)))
+      (princ
+       (concat "Your tip for the day is:\n========================\n\n"
+               (describe-function command)
+               "\n\nInvoke with:\n\n"
+               (with-temp-buffer
+                 (where-is command t)
+                 (buffer-string)))))))
+
 (add-hook 'ruby-mode-hook
            (lambda()
              (add-hook 'local-write-file-hooks
@@ -17,6 +34,20 @@
              (require 'ruby-electric)
              (ruby-electric-mode t)
              ))
+
+
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
+
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
 (add-hook 'js-mode-hook #'smartparens-mode)
 
@@ -135,7 +166,7 @@ Version 2017-07-08"
 (global-set-key (kbd "RET") 'newline-and-indent)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized/")
-(load-theme 'solarized t)
+(load-theme 'solarized-dark t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -150,6 +181,10 @@ Version 2017-07-08"
  '(apropos-do-all t)
  '(blink-cursor-blinks 1)
  '(column-number-mode t)
+ '(custom-enabled-themes (quote (solarized-dark)))
+ '(custom-safe-themes
+   (quote
+    ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(desktop-save (quote if-exists))
  '(desktop-save-mode t)
  '(electric-indent-mode nil)
@@ -161,6 +196,7 @@ Version 2017-07-08"
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
+ '(js2-basic-offset 2)
  '(load-prefer-newer t)
  '(mouse-yank-at-point t)
  '(package-archives
@@ -191,11 +227,15 @@ Version 2017-07-08"
      (nil "192.168.1.10" "pi"))))
  '(typescript-indent-level 2)
  '(typescript-mode-hook (quote (smartparens-mode)))
- '(visible-bell t))
+ '(visible-bell t)
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "gray16" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "Menlo"))))
- '(cursor ((t (:background "red")))))
+ )
+
+;; Setup for smart mode line
+(sml/setup)
+
