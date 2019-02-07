@@ -3,6 +3,8 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
 ;; Emacs tip of the day
@@ -51,6 +53,7 @@
 
 (add-hook 'js-mode-hook #'smartparens-mode)
 
+;; shortcut macro to type console.log
 (fset 'jlog
    "console.log(\"")
 
@@ -123,6 +126,17 @@ Version 2017-07-08"
 (autoload 'zap-up-to-char "misc"
   "Kill up to, but not including ARGth occurrence of CHAR." t)
 
+;; Require this so that the related variables are defined
+(require 'smart-mode-line)
+
+;; Create a hook to call after emacs loads
+(defun my/sml-setup-hook ()
+  "Enable sml after Emacs has loaded."
+  (sml/setup))
+
+(add-hook 'after-init-hook 'my/sml-setup-hook)
+
+
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
@@ -165,8 +179,8 @@ Version 2017-07-08"
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized/")
-(load-theme 'solarized-dark t)
+;;(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized/")
+;;(load-theme 'solarized-dark t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -179,14 +193,16 @@ Version 2017-07-08"
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
  '(apropos-do-all t)
+ '(battery-mode-line-format " %p%%")
  '(blink-cursor-blinks 1)
  '(column-number-mode t)
- '(custom-enabled-themes (quote (solarized-dark)))
+ '(custom-enabled-themes (quote (smart-mode-line-dark solarized-dark)))
  '(custom-safe-themes
    (quote
-    ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(desktop-save (quote if-exists))
  '(desktop-save-mode t)
+ '(display-battery-mode t)
  '(electric-indent-mode nil)
  '(electric-layout-mode nil)
  '(electric-pair-mode nil)
@@ -197,20 +213,76 @@ Version 2017-07-08"
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
  '(js2-basic-offset 2)
- '(load-prefer-newer t)
- '(mouse-yank-at-point t)
- '(package-archives
-   (quote
-    (("gnu" . "http://elpa.gnu.org/packages/")
-     ("melpa-stable" . "http://stable.melpa.org/packages/"))))
- '(package-selected-packages
-   (quote
-    (web-mode comment-tags ruby-electric smartparens tide)))
- '(recentf-mode t)
- '(require-final-newline t)
- '(save-interprogram-paste-before-kill t)
- '(show-paren-mode 1)
  '(show-paren-style (quote mixed))
+ '(sml/mode-width
+   (if
+       (eq
+        (powerline-current-separator)
+        (quote arrow))
+       (quote right)
+     (quote full)))
+ '(sml/pos-id-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active1)
+     (:eval
+      (propertize " "
+                  (quote display)
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s"
+                            (powerline-current-separator)
+                            (car powerline-default-separator-dir)))
+                   (quote powerline-active1)
+                   (quote powerline-active2))))
+     (:propertize " " face powerline-active2))))
+ '(sml/pos-minor-modes-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active1)
+     (:eval
+      (propertize " "
+                  (quote display)
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s"
+                            (powerline-current-separator)
+                            (cdr powerline-default-separator-dir)))
+                   (quote powerline-active1)
+                   (quote sml/global))))
+     (:propertize " " face sml/global))))
+ '(sml/pre-id-separator
+   (quote
+    (""
+     (:propertize " " face sml/global)
+     (:eval
+      (propertize " "
+                  (quote display)
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s"
+                            (powerline-current-separator)
+                            (car powerline-default-separator-dir)))
+                   (quote sml/global)
+                   (quote powerline-active1))))
+     (:propertize " " face powerline-active1))))
+ '(sml/pre-minor-modes-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active2)
+     (:eval
+      (propertize " "
+                  (quote display)
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s"
+                            (powerline-current-separator)
+                            (cdr powerline-default-separator-dir)))
+                   (quote powerline-active2)
+                   (quote powerline-active1))))
+     (:propertize " " face powerline-active1))))
+ '(sml/pre-modes-separator (propertize " " (quote face) (quote sml/modes)))
+ '(sml/theme (quote powerline))
  '(tramp-default-method-alist
    (quote
     ((nil "%" "smb")
@@ -226,16 +298,37 @@ Version 2017-07-08"
      ("\\`synce\\'" nil nil)
      (nil "192.168.1.10" "pi"))))
  '(typescript-indent-level 2)
- '(typescript-mode-hook (quote (smartparens-mode)))
- '(visible-bell t)
- )
+ '(typescript-mode-hook (quote (smartparens-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(mode-line ((t (:background "#fdf6e3" :foreground "#657b83" :box (:line-width -1 :color "#fdf6e3") :overline "#073642" :underline "#284b54"))))
+ '(sml/charging ((t (:background "#859900" :foreground "#eee8d5"))))
+ '(sml/client ((t (:inherit sml/prefix :background "#eee8d5"))))
+ '(sml/col-number ((t (:background "#268bd2" :foreground "#fdf6e3" :weight bold))))
+ '(sml/discharging ((t (:inherit sml/global :background "#dc322f" :foreground "#eee8d5" :weight bold))))
+ '(sml/filename ((t (:inherit sml/global :background "#eee8d5" :foreground "#6c71c4" :weight bold))))
+ '(sml/folder ((t (:inherit sml/global :background "#eee8d5" :foreground "#839496" :weight normal))))
+ '(sml/git ((t (:inherit (sml/read-only sml/prefix) :background "#fdf6e3"))))
+ '(sml/global ((t (:background "#fdf6e3" :foreground "#657b83" :inverse-video nil))))
+ '(sml/line-number ((t (:inherit sml/global :background "#268bd2" :foreground "#fdf6e3" :weight bold))))
+ '(sml/modes ((t (:inherit sml/global :background "#cb4b16" :foreground "#002b36"))))
+ '(sml/modified ((t (:background "#eee8d5" :foreground "#2aa198"))))
+ '(sml/mule-info ((t (:inherit sml/global :background "#eee8d5"))))
+ '(sml/name-filling ((t (:inherit sml/prefix :background "#eee8d5" :weight normal))))
+ '(sml/not-modified ((t (:inherit sml/global :background "#eee8d5" :foreground "#859900" :weight bold))))
+ '(sml/numbers-separator ((t (:inherit sml/col-number :background "#268bd2" :foreground "#fdf6e3"))))
+ '(sml/outside-modified ((t (:background "#eee8d5" :foreground "#2aa198"))))
+ '(sml/position-percentage ((t (:inherit sml/prefix :background "#6c71c4" :foreground "#002b36" :weight normal))))
+ '(sml/prefix ((t (:inherit sml/global :background "#eee8d5" :foreground "#bf6000"))))
+ '(sml/process ((t (:inherit sml/prefix :background "#eee8d5" :weight bold))))
+ '(sml/read-only ((t (:inherit sml/not-modified :foreground "#657b83"))))
+ '(sml/remote ((t (:inherit sml/global :background "#eee8d5"))))
+ '(sml/sudo ((t (:inherit sml/outside-modified :background "#eee8d5" :foreground "#cb4b16" :weight bold))))
+ '(sml/time ((t (:inherit sml/global :background "#eee8d5"))))
+ '(sml/vc ((t (:inherit sml/git :background "#dc322f" :foreground "#002b36"))))
+ '(sml/vc-edited ((t (:inherit sml/prefix :background "#cb4b16" :foreground "#002b36")))))
 
-;; Setup for smart mode line
-(sml/setup)
 
