@@ -1,7 +1,6 @@
 ### Local stuff ###
 #PATH=/usr/local/sbin:/usr/local/opt/icu4c/bin:/usr/local/opt/icu4c/sbin:$PATH
-PATH="/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-PATH="$PATH:$HOME/.rvm/bin"
+PATH="/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/ruby/bin:$PATH"
 export PATH
 
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
