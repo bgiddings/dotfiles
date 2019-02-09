@@ -63,11 +63,28 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws dotenv emacs git osx)
+plugins=(aws dotenv emacs git history-substring-search osx)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+stty -ixon -ixoff 2>/dev/null # really, no flow control.
+
+local name="$(uname -s)"
+case "${name}" in
+    Linux*)
+        source ~/.zsh/zsh_linux
+        ;;
+    Darwin*)
+        source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+        source ~/.zsh/zsh_mac
+        ;;
+esac
+
+# source ~/.zsh/zsh_prompts
+source ~/.zsh/zsh_aliases
+source ~/.zsh/zsh_opts
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

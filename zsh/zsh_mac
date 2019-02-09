@@ -1,6 +1,5 @@
 ### Local stuff ###
-#PATH=/usr/local/sbin:/usr/local/opt/icu4c/bin:/usr/local/opt/icu4c/sbin:$PATH
-PATH="/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/ruby/bin:$PATH"
+PATH="/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/grep/libexec/gnubin:/usr/local/opt/ruby/bin:$PATH"
 export PATH
 
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -9,13 +8,12 @@ export MANPATH
 # ZSH Completions for Brew (MacOS only)
 fpath=($HOME/homebrew/share/zsh-completions $fpath)
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # Node.js
 LDFLAGS=-L/usr/local/opt/icu4c/lib
 CPPFLAGS=-I/usr/local/opt/icu4c/include
-
 PKG_CONFIG_PATH=/usr/local/opt/icu4c/lib/pkgconfig
 
 export LDFLAGS

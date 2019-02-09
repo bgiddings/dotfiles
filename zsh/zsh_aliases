@@ -2,6 +2,30 @@
 # Aliases
 #
 
+ls-flag-available() {
+    ls $1 >/dev/null 2>&1
+}
+
+LS_OPTIONS=""
+
+# color grep results
+if ls-flag-available --color="always"; then
+  LS_OPTIONS+="--color=\"always\""
+elif ls-flag-available -G; then
+  LS_OPTIONS+="-G"
+fi
+
+grep-flag-available() {
+    echo foo |grep $1 "" >/dev/null 2>&1
+}
+
+GREP_OPTIONS=""
+
+# color grep results
+if grep-flag-available --color="always"; then
+  GREP_OPTIONS+="--color=\"always\""
+fi
+
 
 alias mv='nocorrect mv'
 alias cp='nocorrect cp'
@@ -11,19 +35,19 @@ alias pu=pushd
 alias po=popd
 alias d='dirs -v'
 alias h=history
-alias grep=grep --color="always"
-alias egrep=egrep --color="always"
-alias ls="command ls --color="always" -F"
-alias ll="command ls --color="always" -l -h"
-alias la="command ls --color="always" -a"
-alias ltrh="command ls --color="always" -ltrh"
+alias grep=grep $GREP_OPTIONS
+alias egrep=egrep $GREP_OPTIONS
+alias ls="command ls $LS_OPTIONS -F"
+alias ll="command ls $LS_OPTIONS -l -h"
+alias la="command ls $LS_OPTIONS -a"
+alias ltrh="command ls $LS_OPTIONS -ltrh"
 alias du='command du -h --max-depth=1'
 alias df='command df -h'
 alias diff='command diff -ubB'
 
 # List only directories and symlinks
 # that point to directories
-alias lsd="command ls --color="always" -ld *(-/DN)"
+alias lsd="command ls $LS_OPTIONS -ld *(-/DN)"
 
 # List only files beginning with .
-alias lsa="command ls --color="always" -ld .*"
+alias lsa="command ls $LS_OPTIONS -ld .*"
