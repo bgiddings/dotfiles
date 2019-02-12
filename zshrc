@@ -74,7 +74,12 @@ stty -ixon -ixoff 2>/dev/null # really, no flow control.
 local name="$(uname -s)"
 case "${name}" in
     Linux*)
-        source ~/.zsh/zsh_linux
+        if uname -r |grep -b -o -q Microsoft; then
+            # This is actually Linux Subsystem for Windows
+            source ~/.zsh/zsh_lsw
+        else
+            source ~/.zsh/zsh_linux
+        fi
         ;;
     Darwin*)
         source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
