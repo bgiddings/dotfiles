@@ -1,6 +1,23 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Need this to set up paths before calling plugins
+local name="$(uname -s)"
+case "${name}" in
+    Linux*)
+        if uname -r |grep -b -o -q Microsoft; then
+            # This is actually Linux Subsystem for Windows
+            source ~/.zsh/zsh_lsw
+        else
+            source ~/.zsh/zsh_linux
+        fi
+        ;;
+    Darwin*)
+        source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+        source ~/.zsh/zsh_mac
+        ;;
+esac
+
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/merc/dotfiles/oh-my-zsh"
 
@@ -71,21 +88,6 @@ source $ZSH/oh-my-zsh.sh
 
 stty -ixon -ixoff 2>/dev/null # really, no flow control.
 
-local name="$(uname -s)"
-case "${name}" in
-    Linux*)
-        if uname -r |grep -b -o -q Microsoft; then
-            # This is actually Linux Subsystem for Windows
-            source ~/.zsh/zsh_lsw
-        else
-            source ~/.zsh/zsh_linux
-        fi
-        ;;
-    Darwin*)
-        source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-        source ~/.zsh/zsh_mac
-        ;;
-esac
 
 # source ~/.zsh/zsh_prompts
 source ~/.zsh/zsh_aliases

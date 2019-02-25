@@ -1,9 +1,4 @@
 ### Local stuff ###
-PATH="/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/grep/libexec/gnubin:/usr/local/opt/ruby/bin:$PATH"
-export PATH
-
-MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-export MANPATH
 
 # ZSH Completions for Brew (MacOS only)
 fpath=($HOME/homebrew/share/zsh-completions $fpath)
