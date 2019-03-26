@@ -8,7 +8,8 @@ path=(
     "/usr/local/bin"
     "$PATH"
     "/usr/local/sbin"
-    "$GOPATH/bin")
+    "$GOPATH/bin"
+    "$HOME/Documents/Development/flutter/release/flutter/bin")
 
 # Undo mangling of path from path_helper in /etc/zprofile
 export FIXED_PATH=$PATH
