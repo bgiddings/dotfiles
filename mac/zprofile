@@ -6,14 +6,18 @@ if [ -n "$FIXED_PATH" ]; then
     PATH=$PATH:
     while [ -n "$PATH" ]; do
         x=${PATH%%:*}  # the first remaining entry
+
         case $FIXED_PATH in
-            *:$x:*) ;;  # already there
-            *) FIXED_PATH=$FIXED_PATH$x: ;;  # not there yet
+            *:$x:*)
+                ;;  # already there
+            *)
+                FIXED_PATH=$FIXED_PATH$x:
+                ;;  # not there yet
         esac
         PATH=${PATH#*:}
     done
     PATH=${FIXED_PATH:1:-1}
+
     unset FIXED_PATH x
     export PATH
 fi
-
