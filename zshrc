@@ -74,7 +74,7 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
-$ZSH_CUSTOM="$HOME/dotfiles/omz-custom"
+ZSH_CUSTOM="$HOME/dotfiles/omz-custom"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
