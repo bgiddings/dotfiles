@@ -18,7 +18,7 @@
              (ruby-electric-mode t)
              ))
 
-(add-hook 'js-mode-hook #'smartparens-mode)
+;; (add-hook 'js-mode-hook #'smartparens-mode)
 
 (fset 'jlog
    "console.log(\"")
@@ -111,7 +111,7 @@ Version 2017-07-08"
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 
-(require 'smartparens-config)
+;; (require 'smartparens-config)
 
 ;; When the buffer looks like {|} and the cursor is at |, hitting
 ;; enter indents to the correct place
@@ -122,10 +122,10 @@ Version 2017-07-08"
   (forward-line -1)
   (indent-according-to-mode))
 
-(sp-with-modes '(csharp-mode js-mode awk-mode typescript-mode)
-  (sp-local-pair "(" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
-  (sp-local-pair "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
-  (sp-local-pair "[" nil :post-handlers '((my-create-newline-and-enter-sexp "RET"))))
+;; (sp-with-modes '(csharp-mode js-mode awk-mode typescript-mode)
+;;   (sp-local-pair "(" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+;;   (sp-local-pair "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+;;   (sp-local-pair "[" nil :post-handlers '((my-create-newline-and-enter-sexp "RET"))))
 
 
 (eval-after-load 'flycheck
@@ -134,8 +134,8 @@ Version 2017-07-08"
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized/")
-(load-theme 'solarized t)
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized/")
+;; (load-theme 'solarized t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
