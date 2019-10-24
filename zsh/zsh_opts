@@ -31,6 +31,9 @@ setopt HIST_FIND_NO_DUPS
 # If a command starts with a space, don't put it in the history
 setopt HIST_IGNORE_SPACE
 
+# Do not enter command lines into the history list if they are duplicates of the previous event.
+setopt HIST_IGNORE_DUPS
+
 # Don't beep for lists
 setopt NO_LIST_BEEP
 

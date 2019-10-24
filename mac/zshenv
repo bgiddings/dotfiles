@@ -1,0 +1,23 @@
+GOPATH="$HOME/Documents/Development/go"
+export GOPATH
+
+path=(
+    "/usr/local/opt/coreutils/libexec/gnubin"
+    "/usr/local/opt/grep/libexec/gnubin"
+    "/usr/local/opt/ruby/bin"
+    "/usr/local/bin"
+    $path
+    "/usr/local/sbin"
+    "$GOPATH/bin"
+    "$HOME/Documents/Development/flutter/release/flutter/bin")
+
+# Undo mangling of path from path_helper in /etc/zprofile
+export FIXED_PATH=$PATH
+
+typeset -aU path
+export PATH
+
+MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export MANPATH
+
+

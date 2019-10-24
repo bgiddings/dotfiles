@@ -3,7 +3,26 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
+
+;; Emacs tip of the day
+;; https://www.emacswiki.org/emacs/TipOfTheDay
+(require 'cl)
+ (defun totd ()
+  (interactive)
+  (with-output-to-temp-buffer "*Tip of the day*"
+    (let* ((commands (loop for s being the symbols
+                           when (commandp s) collect s))
+           (command (nth (random (length commands)) commands)))
+      (princ
+       (concat "Your tip for the day is:\n========================\n\n"
+               (describe-function command)
+               "\n\nInvoke with:\n\n"
+               (with-temp-buffer
+                 (where-is command t)
+                 (buffer-string)))))))
 
 (add-hook 'ruby-mode-hook
            (lambda()
@@ -18,8 +37,22 @@
              (ruby-electric-mode t)
              ))
 
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
+
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
 ;; (add-hook 'js-mode-hook #'smartparens-mode)
 
+;; shortcut macro to type console.log
 (fset 'jlog
    "console.log(\"")
 
@@ -92,6 +125,17 @@ Version 2017-07-08"
 (autoload 'zap-up-to-char "misc"
   "Kill up to, but not including ARGth occurrence of CHAR." t)
 
+;; Require this so that the related variables are defined
+(require 'smart-mode-line)
+
+;; Create a hook to call after emacs loads
+(defun my/sml-setup-hook ()
+  "Enable sml after Emacs has loaded."
+  (sml/setup))
+
+(add-hook 'after-init-hook 'my/sml-setup-hook)
+
+
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
@@ -134,8 +178,13 @@ Version 2017-07-08"
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 
+<<<<<<< HEAD
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized/")
 ;; (load-theme 'solarized t)
+=======
+;;(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized/")
+;;(load-theme 'solarized-dark t)
+>>>>>>> 9fcaeca3192098d791ddc179e6261fd3c2f03721
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -148,10 +197,16 @@ Version 2017-07-08"
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
  '(apropos-do-all t)
+ '(battery-mode-line-format " %p%%")
  '(blink-cursor-blinks 1)
  '(column-number-mode t)
+ '(custom-enabled-themes (quote (smart-mode-line-dark solarized-dark)))
+ '(custom-safe-themes
+   (quote
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(desktop-save (quote if-exists))
  '(desktop-save-mode t)
+ '(display-battery-mode t)
  '(electric-indent-mode nil)
  '(electric-layout-mode nil)
  '(electric-pair-mode nil)
@@ -161,20 +216,14 @@ Version 2017-07-08"
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
- '(load-prefer-newer t)
- '(mouse-yank-at-point t)
- '(package-archives
-   (quote
-    (("gnu" . "http://elpa.gnu.org/packages/")
-     ("melpa-stable" . "http://stable.melpa.org/packages/"))))
+ '(js2-basic-offset 2)
  '(package-selected-packages
    (quote
-    (web-mode comment-tags ruby-electric smartparens tide)))
- '(recentf-mode t)
- '(require-final-newline t)
- '(save-interprogram-paste-before-kill t)
- '(show-paren-mode 1)
+    (web-mode solarized-theme smartparens smart-mode-line-powerline-theme rust-playground js2-mode)))
  '(show-paren-style (quote mixed))
+ '(size-indication-mode t)
+ '(sml/battery-format " %p%%")
+ '(sml/show-frame-identification nil)
  '(tramp-default-method-alist
    (quote
     ((nil "%" "smb")
@@ -190,12 +239,13 @@ Version 2017-07-08"
      ("\\`synce\\'" nil nil)
      (nil "192.168.1.10" "pi"))))
  '(typescript-indent-level 2)
- '(typescript-mode-hook (quote (smartparens-mode)))
- '(visible-bell t))
+ '(typescript-mode-hook (quote (smartparens-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "gray16" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "Menlo"))))
- '(cursor ((t (:background "red")))))
+ )
+
+
+
