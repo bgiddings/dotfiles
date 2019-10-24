@@ -19,7 +19,7 @@ case "${name}" in
 esac
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/merc/dotfiles/oh-my-zsh"
+export ZSH="$HOME/dotfiles/oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
