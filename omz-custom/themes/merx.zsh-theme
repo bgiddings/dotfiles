@@ -23,7 +23,28 @@ local username_root_color=$red
 local hostname_root_color=$red
 
 # calculating hostname color with hostname characters
-for i in `hostname`; local hostname_normal_color=$color_array[$[((#i))%6+1]]
+
+# Convert characters to their ASCII numbers
+ord() {
+  LC_CTYPE=C printf '%d' "'$1'"
+}
+
+let count=0;               # A running count of characters
+local tmp=`hostname`;
+while [ -n "$tmp" ]; do
+  local rest="${tmp#?}";        # All but the first character of the string
+  local first="${tmp%"$rest"}"; # Remove $rest leaving only the first char
+  local char=$(ord $first);     # Get the character code for the first char
+  count=$(($count + $char));    # Add the current char to the running total
+  tmp="$rest";
+done
+
+# Get an array index using the 6 valid host colors from 1 to 6 (not 0 to 5)
+let idx=$(($count % 6 + 1));
+
+local hostname_normal_color=$color_array[$idx]
+
+# for i in `hostname`; local hostname_normal_color=$color_array[$[((#i))%6+1]]
 local -a hostname_color
 hostname_color=%(!.$hostname_root_color.$hostname_normal_color)
 
