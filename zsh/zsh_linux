@@ -1,0 +1,4 @@
+### Local stuff for Linux ###
+
+path=($HOME/go/bin $path)
+
