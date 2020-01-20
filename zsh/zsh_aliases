@@ -47,7 +47,13 @@ alias diff='command diff -ubB'
 
 # List only directories and symlinks
 # that point to directories
-alias lsd="command ls $LS_OPTIONS -ld *(-/DN)"
+alias lsd="command ls $LS_OPTIONS -d *(-/DN)"
+alias lld="command ls $LS_OPTIONS -ld *(-/DN)"
+# -: not symlinks
+# /: dirs
+# D: set GLOB_DOTS so .emacs.d/ etc are included
+# N: set NULL_GLOB so no matching options doesn't give an error message
 
 # List only files beginning with .
-alias lsa="command ls $LS_OPTIONS -ld .*"
+alias lsa="command ls $LS_OPTIONS -d .*"
+alias lla="command ls $LS_OPTIONS -ld .*"

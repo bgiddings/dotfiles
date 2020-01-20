@@ -1,6 +1,23 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# improve LESS
+export LESS="--quit-if-one-screen --no-init --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --window=-4"
+# --quit-if-one-screen: If the entire file can be displayed in one screen,
+#   then don't use the pager.  Depends on --no-init
+# --ignore-case: ignore case in searches by default
+# --status-column: display a status column on the left to show matching / unread lines
+# --LONG-PROMPT: prompt more verbosely
+# --RAW-CONTROL-CHARS: ANSI color in raw form
+# --HILITE-UNREAD: highlight the first unread line when scrolling by pages
+
+# If kubectl is in your path, set up completion for it
+if [ $commands[kubectl] ]
+then
+  source <(kubectl completion zsh)
+fi
+
+
 # Need this to set up paths before calling plugins
 local name="$(uname -s)"
 case "${name}" in
