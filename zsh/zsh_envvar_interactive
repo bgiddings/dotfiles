@@ -1,0 +1,4 @@
+# S_TIME_FORMAT used by some interactive tools like Brandon Gregg's tools
+export S_TIME_FORMAT=ISO
+
+

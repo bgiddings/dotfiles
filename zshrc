@@ -108,6 +108,7 @@ stty -ixon -ixoff 2>/dev/null # really, no flow control.
 
 
 # source ~/.zsh/zsh_prompts
+source ~/.zsh/zsh_envvar_interactive
 source ~/.zsh/zsh_aliases
 source ~/.zsh/zsh_opts
 
