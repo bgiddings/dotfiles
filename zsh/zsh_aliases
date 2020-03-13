@@ -57,3 +57,7 @@ alias lld="command ls $LS_OPTIONS -ld *(-/DN)"
 # List only files beginning with .
 alias lsa="command ls $LS_OPTIONS -d .*"
 alias lla="command ls $LS_OPTIONS -ld .*"
+
+
+alias ip="ip --color=auto"
+
